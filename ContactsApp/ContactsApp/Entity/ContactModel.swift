@@ -8,8 +8,6 @@
 
 import Foundation
 
-//{"id":6179,"first_name":"AAAkash","last_name":"Gupta","email":"fdsfds@gmail.com","phone_number":"5656768777","profile_pic":"/images/missing.png","favorite":false,"created_at":"2019-06-23T04:06:48.243Z","updated_at":"2019-06-23T04:06:48.243Z"}
-
 struct ContactModel: Codable {
     let id : Int
     var firstName : String
@@ -34,6 +32,12 @@ struct ContactModel: Codable {
 
 extension ContactModel {
     var fullName: String {
+        if firstName.isEmpty {
+            return lastName
+        }
+        if lastName.isEmpty {
+            return firstName
+        }
         return firstName + " " + lastName
     }
     

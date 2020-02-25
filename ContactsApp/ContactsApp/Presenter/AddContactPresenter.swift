@@ -29,15 +29,14 @@ class AddContactPresenter: ContactDetailPresenter, AddContactPresenterInterface 
         guard let lastName = params[LabelTextFieldViewModelTitle.lastName.getJSONKey()] as? String, !lastName.isEmpty else {
             return (false, Constants.ErrorMessage.invalidLastName)
         }
-        guard let mobile = params[LabelTextFieldViewModelTitle.mobile.getJSONKey()] as? String, mobile.isValidMobile() else {
+        guard let mobile = params[LabelTextFieldViewModelTitle.mobile.getJSONKey()] as? String, MobilePredicate().evaluate(with: mobile) else {
             return (false, Constants.ErrorMessage.invalidMobile)
         }
-        guard let email = params[LabelTextFieldViewModelTitle.email.getJSONKey()] as? String, email.isValidEmail() else {
+        guard let email = params[LabelTextFieldViewModelTitle.email.getJSONKey()] as? String, EmailPredicate().evaluate(with: email) else {
             return (false, Constants.ErrorMessage.invalidEmail)
         }
         return (true, nil)
     }
-    
     
     override var contact: ContactModel? {
         didSet {
@@ -50,16 +49,14 @@ class AddContactPresenter: ContactDetailPresenter, AddContactPresenterInterface 
     }
     
     func didClickDone(contact: [String: Any], viewController: UIViewController) {
+        let block = {[weak self] (result: Result<Data, Error>) in
+            self?.handleResponse(result: result)
+            AppRouter.shared.dismissVC(viewController: viewController)
+        }
         if let id = self.contact?.id {
-            contactsInteractor.updateContact(id: "\(id)", params: contact) {[weak self] (responseType) in
-                self?.handleResponse(responseType: responseType)
-                AppRouter.shared.dismissVC(viewController: viewController)
-            }
+            contactsInteractor.updateContact(id: "\(id)", params: contact, completion: block)
         } else {
-            contactsInteractor.addContact(params: contact) {[weak self] (responseType) in
-                self?.handleResponse(responseType: responseType)
-                AppRouter.shared.dismissVC(viewController: viewController)
-            }
+            contactsInteractor.addContact(params: contact, completion: block)
         }
     }
     

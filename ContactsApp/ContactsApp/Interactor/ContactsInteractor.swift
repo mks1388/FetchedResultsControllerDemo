@@ -9,15 +9,14 @@
 
 import UIKit
 
-protocol ContactsInteractorInterface : class {
-    
-    func fetchContacts(completion: @escaping (ResponseType) -> Void)
-    func fetchContactDetail(id: String, completion: @escaping (ResponseType) -> Void)
-    func addContact(params: Dictionary<String, Any>, completion: @escaping (ResponseType) -> Void)
-    func updateContact(id: String, params: Dictionary<String, Any>, completion: @escaping (ResponseType) -> Void)
+protocol ContactsInteractorInterface {
+    func fetchContacts(completion: @escaping (Result<Data, Error>) -> Void)
+    func fetchContactDetail(id: String, completion: @escaping (Result<Data, Error>) -> Void)
+    func addContact(params: Dictionary<String, Any>, completion: @escaping (Result<Data, Error>) -> Void)
+    func updateContact(id: String, params: Dictionary<String, Any>, completion: @escaping (Result<Data, Error>) -> Void)
 }
 
-class ContactsInteractor: ContactsInteractorInterface {
+struct ContactsInteractor: ContactsInteractorInterface {
     
     private let networkTask : NetworkTaskInterface
     
@@ -25,19 +24,23 @@ class ContactsInteractor: ContactsInteractorInterface {
         self.networkTask = networkTask
     }
     
-    func fetchContacts(completion: @escaping (ResponseType) -> Void) {
-        networkTask.sendRequest(urlString: Constants.APIUrl.contactsUrl, completion: completion)
+    func fetchContacts(completion: @escaping (Result<Data, Error>) -> Void) {
+        let request = GetRequest(queryParams: nil, urlString: Constants.APIUrl.contactsUrl)
+        networkTask.sendRequest(request: request, completion: completion)
     }
     
-    func fetchContactDetail(id: String, completion: @escaping (ResponseType) -> Void) {
-        networkTask.sendRequest(urlString: Constants.APIUrl.contactDetailBaseUrl + "/\(id).json", completion: completion)
+    func fetchContactDetail(id: String, completion: @escaping (Result<Data, Error>) -> Void) {
+        let request = GetRequest(queryParams: nil, urlString: Constants.APIUrl.contactDetailBaseUrl + "/\(id).json")
+        networkTask.sendRequest(request: request, completion: completion)
     }
     
-    func addContact(params: Dictionary<String, Any>, completion: @escaping (ResponseType) -> Void) {
-        networkTask.sendRequest(urlString: Constants.APIUrl.contactsUrl, params: params, httpMethod: .post, completion: completion)
+    func addContact(params: [String: Any], completion: @escaping (Result<Data, Error>) -> Void) {
+        let request = PostRequest(requestUrlString: Constants.APIUrl.contactsUrl, body: params)
+        networkTask.sendRequest(request: request, completion: completion)
     }
     
-    func updateContact(id: String, params: Dictionary<String, Any>, completion: @escaping (ResponseType) -> Void) {
-        networkTask.sendRequest(urlString: Constants.APIUrl.contactDetailBaseUrl + "/\(id).json", params: params, httpMethod: .put, completion: completion)
+    func updateContact(id: String, params: [String: Any], completion: @escaping (Result<Data, Error>) -> Void) {
+        let request = PutRequest(requestUrlString: Constants.APIUrl.contactDetailBaseUrl + "/\(id).json", body: params)
+        networkTask.sendRequest(request: request, completion: completion)
     }
 }

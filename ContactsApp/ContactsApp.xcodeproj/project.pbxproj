@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1127764124051B6A00E01949 /* EmailPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1127764024051B6A00E01949 /* EmailPredicate.swift */; };
+		1127764324051D9500E01949 /* RegexPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1127764224051D9500E01949 /* RegexPredicate.swift */; };
+		1127764524051E0C00E01949 /* MobilePredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1127764424051E0C00E01949 /* MobilePredicate.swift */; };
+		1127764724052DDF00E01949 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1127764624052DDF00E01949 /* NetworkRequest.swift */; };
+		1127764924052E1500E01949 /* GetRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1127764824052E1500E01949 /* GetRequest.swift */; };
+		1127764D24052E3700E01949 /* PostRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1127764C24052E3700E01949 /* PostRequest.swift */; };
+		1127764F240531C700E01949 /* PutRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1127764E240531C700E01949 /* PutRequest.swift */; };
 		1CC0AE0A22BE29620016BF50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC0AE0922BE29620016BF50 /* AppDelegate.swift */; };
 		1CC0AE0F22BE29620016BF50 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CC0AE0D22BE29620016BF50 /* Main.storyboard */; };
 		1CC0AE1222BE29620016BF50 /* ContactsApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1CC0AE1022BE29620016BF50 /* ContactsApp.xcdatamodeld */; };
@@ -69,6 +76,13 @@
 
 /* Begin PBXFileReference section */
 		0763E0FEB87B10D6AFC4115B /* Pods_ContactsAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ContactsAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1127764024051B6A00E01949 /* EmailPredicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailPredicate.swift; sourceTree = "<group>"; };
+		1127764224051D9500E01949 /* RegexPredicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexPredicate.swift; sourceTree = "<group>"; };
+		1127764424051E0C00E01949 /* MobilePredicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobilePredicate.swift; sourceTree = "<group>"; };
+		1127764624052DDF00E01949 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		1127764824052E1500E01949 /* GetRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRequest.swift; sourceTree = "<group>"; };
+		1127764C24052E3700E01949 /* PostRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRequest.swift; sourceTree = "<group>"; };
+		1127764E240531C700E01949 /* PutRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PutRequest.swift; sourceTree = "<group>"; };
 		1CC0AE0622BE29620016BF50 /* ContactsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CC0AE0922BE29620016BF50 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1CC0AE0E22BE29620016BF50 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -178,7 +192,7 @@
 			children = (
 				1CC0AE4322BE2E200016BF50 /* Helper */,
 				1CC0AE4022BE2B550016BF50 /* Store */,
-				1CC0AE3F22BE2AF00016BF50 /* Worker */,
+				1CC0AE3F22BE2AF00016BF50 /* Network */,
 				1CC0AE3E22BE2AE70016BF50 /* Router */,
 				1CC0AE3D22BE2ADF0016BF50 /* Entity */,
 				1CC0AE3C22BE2AD70016BF50 /* Presenter */,
@@ -260,13 +274,16 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
-		1CC0AE3F22BE2AF00016BF50 /* Worker */ = {
+		1CC0AE3F22BE2AF00016BF50 /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				1CC0AE5322BE3A5D0016BF50 /* NetworkTask.swift */,
-				1CC0AE5F22BE6EC00016BF50 /* AppUtils.swift */,
+				1127764624052DDF00E01949 /* NetworkRequest.swift */,
+				1127764824052E1500E01949 /* GetRequest.swift */,
+				1127764C24052E3700E01949 /* PostRequest.swift */,
+				1127764E240531C700E01949 /* PutRequest.swift */,
 			);
-			path = Worker;
+			path = Network;
 			sourceTree = "<group>";
 		};
 		1CC0AE4022BE2B550016BF50 /* Store */ = {
@@ -281,9 +298,13 @@
 			isa = PBXGroup;
 			children = (
 				1CC0AE4422BE2E310016BF50 /* Category */,
+				1CC0AE5F22BE6EC00016BF50 /* AppUtils.swift */,
 				1CC0AE5122BE380E0016BF50 /* Constants.swift */,
 				1CC0AE6F22BEA0D20016BF50 /* AppBuilder.swift */,
 				1CC0AE8322BF9A2B0016BF50 /* AppModelMapper.swift */,
+				1127764024051B6A00E01949 /* EmailPredicate.swift */,
+				1127764424051E0C00E01949 /* MobilePredicate.swift */,
+				1127764224051D9500E01949 /* RegexPredicate.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -575,6 +596,7 @@
 				1CC0AE7222BEA2A90016BF50 /* AddContactTableViewController.swift in Sources */,
 				1CC0AE6622BE933C0016BF50 /* AppRouter.swift in Sources */,
 				1CC0AE7E22BF7F6B0016BF50 /* ContactTableViewController.swift in Sources */,
+				1127764D24052E3700E01949 /* PostRequest.swift in Sources */,
 				1CC0AE8622BFD5470016BF50 /* Notification+Name.swift in Sources */,
 				1CC0AE1222BE29620016BF50 /* ContactsApp.xcdatamodeld in Sources */,
 				1CC0AE8422BF9A2B0016BF50 /* AppModelMapper.swift in Sources */,
@@ -583,6 +605,8 @@
 				1CC0AE7822BF5F170016BF50 /* ContactDetailTableViewHeader.swift in Sources */,
 				1CC0AE4A22BE300C0016BF50 /* Date+String.swift in Sources */,
 				1CC0AE7A22BF5F910016BF50 /* AddContactTableViewHeader.swift in Sources */,
+				1127764524051E0C00E01949 /* MobilePredicate.swift in Sources */,
+				1127764F240531C700E01949 /* PutRequest.swift in Sources */,
 				1CC0AE0A22BE29620016BF50 /* AppDelegate.swift in Sources */,
 				1CC0AE6B22BE97A50016BF50 /* LabelTextFieldTableViewCell.swift in Sources */,
 				1CC0AE7022BEA0D20016BF50 /* AppBuilder.swift in Sources */,
@@ -591,9 +615,12 @@
 				1CC0AE4222BE2B7B0016BF50 /* CoreDataStack.swift in Sources */,
 				1CC0AE5E22BE68AC0016BF50 /* ContactsSectionModel.swift in Sources */,
 				1CC0AE7622BF4BE70016BF50 /* ContactDetailTableViewController.swift in Sources */,
+				1127764924052E1500E01949 /* GetRequest.swift in Sources */,
 				1CC0AE6022BE6EC00016BF50 /* AppUtils.swift in Sources */,
 				1CC0AE4E22BE339F0016BF50 /* ReusableInterface.swift in Sources */,
+				1127764324051D9500E01949 /* RegexPredicate.swift in Sources */,
 				1CC0AE7C22BF64B70016BF50 /* LabelTextFieldViewModel.swift in Sources */,
+				1127764124051B6A00E01949 /* EmailPredicate.swift in Sources */,
 				1CC0AE8222BF8F340016BF50 /* ViewContactDetailPresenter.swift in Sources */,
 				1CC0AE6422BE883E0016BF50 /* UIView+Border.swift in Sources */,
 				1CC0AE4622BE2E4B0016BF50 /* String+Validation.swift in Sources */,
@@ -601,6 +628,7 @@
 				1CC0AE5822BE54710016BF50 /* ContactsTableViewController.swift in Sources */,
 				1CC0AE8022BF8D820016BF50 /* AddContactPresenter.swift in Sources */,
 				1CC0AE5422BE3A5D0016BF50 /* NetworkTask.swift in Sources */,
+				1127764724052DDF00E01949 /* NetworkRequest.swift in Sources */,
 				1CC0AE6222BE7D180016BF50 /* ActivityIndicator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

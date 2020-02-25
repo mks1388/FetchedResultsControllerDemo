@@ -73,8 +73,8 @@ class ContactDetailPresenter: ContactDetailPresenterInterface {
         guard let contact = contact else {
             return
         }
-        contactsInteractor.fetchContactDetail(id: "\(contact.id)") {[weak self] (responseType) in
-            self?.handleResponse(responseType: responseType)
+        contactsInteractor.fetchContactDetail(id: "\(contact.id)") {[weak self] (result) in
+            self?.handleResponse(result: result)
         }
     }
     
@@ -86,9 +86,9 @@ class ContactDetailPresenter: ContactDetailPresenterInterface {
         updateDetail(contact: contact)
     }
     
-    func handleResponse(responseType: ResponseType) {
-        switch responseType {
-        case .success(data: let data):
+    func handleResponse(result: Result<Data, Error>) {
+        switch result {
+        case .success(let data):
             do {
                 let model = try JSONDecoder().decode(ContactModel.self, from: data)
                 contact = model
@@ -96,8 +96,8 @@ class ContactDetailPresenter: ContactDetailPresenterInterface {
             } catch let error {
                 print("Error while parsing data \(error.localizedDescription)")
             }
-        case .failure(error: let error):
-            print("Error while fetching detail \(error?.localizedDescription ?? Constants.emptyString)")
+        case .failure(let error):
+            print("Error while fetching detail \(error.localizedDescription)")
         }
     }
     
@@ -111,8 +111,8 @@ class ContactDetailPresenter: ContactDetailPresenterInterface {
             return
         }
         
-        contactsInteractor.updateContact(id: "\(contact.id)", params: dict) {[weak self] (responseType) in
-            self?.handleResponse(responseType: responseType)
+        contactsInteractor.updateContact(id: "\(contact.id)", params: dict) {[weak self] (result) in
+            self?.handleResponse(result: result)
         }
     }
 }
